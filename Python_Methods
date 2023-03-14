@@ -1,0 +1,56 @@
+USEFUL PYTHON METHODS
+
+- find index of closest values in numpy array
+def find_nearest(array, value):
+    array = np.asarray(array)
+    idx = np.unravel_index(np.abs(array - value).argmin(), array.shape)
+    return array[idx],idx
+
+- shift lon from 0-360 to -180,180
+.assign_coords({"lon": (((data.lon + 180) % 360) - 180)})
+
+- datetime format from datestring
+datetime.strptime('{}'.format(data.time[i].values), '%Y/%m/%d %H:%M:%S')
+
+- update font size for whole plot
+plt.rcParams.update({'font.size':14})
+
+- get list of all values in array of duplicates
+list(set(data))
+
+- cartopy projection
+lat_min = 45
+lat_max = 65
+lon_min = -60
+lon_max = -40
+resolution = '10m'
+central_lon, central_lat = (lon_max+lon_min)/2, (lat_max-lat_min)/2
+extent = [lon_min, lon_max, lat_min, lat_max]
+fig,ax = plt.subplots(1,1,figsize=(10,10),subplot_kw=dict(projection=ccrs.Orthographic(central_lon, central_lat)))
+ax.coastlines()
+ax.set_extent(extent)
+gl = ax.gridlines(draw_labels=True,color='grey')
+gl.xlocator= mticker.FixedLocator(np.arange(-60,-35,5))
+
+- calculate anomalies in xarray
+data_ano = data.groupby('time.dayofyear') - data_mean.rename({'doy':'dayofyear'})
+
+- custom legend
+from matplotlib.lines import Line2D
+colors = ['tab:red', 'tab:blue']
+lines = [Line2D([0], [0], color=c, linewidth=3) for c in colors]
+labels = [ 'temperature', 'salinity']
+
+- distance between two lat/lon points along section
+distance = [0]
+R = 6271e3
+lat = ole_orca.lat*np.pi/180
+lon = ole_orca.lon*np.pi/180
+for i in np.arange(1,78):
+    dlat = lat[i] - lat[i-1]
+    dlon = lon[i] - lon[i-1]
+    a = np.sin(dlat/2)*np.sin(dlat/2) + np.cos(lat[i])*np.cos(lat[i-1]) * np.sin(dlon/2)*np.sin(dlon/2)
+    c = 2 * np.arctan2(np.sqrt(a),np.sqrt(1-a))
+    distance.append((R*c).values)
+model_distance = np.cumsum(distance)/1000
+

@@ -1,0 +1,53 @@
+# Cut region and variable
+
+ncks -v *variable -d *dimension,indexmin,indexmax infile.nc outfile.nc
+
+ncks -v votemper -d x,400,749 -d y,1400,1749 -d deptht,0,19 /gxfs_work1/geomar/smomw355/model_data/ocean-only/VIKING20X.L46-KFS003/nemo/output/1_VIKING20X.L46-KFS003_1d_19800101_19801231_grid_T.nc /gxfs_work1/geomar/smomw484/data/temp_shelf_1980.nc
+
+
+# concatenation
+
+create record dimension in the first dataset along which to concatenate
+concatenate all the files
+
+ncks -O -h --mk_rec_dmn *dimension infile.nc RD.outfile.nc
+ncrcat -h RD_outfile.nc all_infiles.nc outfile.nc
+
+ncks -O -h --mk_rec_dmn time_counter sst_NWA_1981.nc RD.sst_NWA_1981.nc
+
+echo "record dimesion done"
+
+ncrcat -h RD.sst_NWA_1981.nc sst_NWA_*.nc sst_NWA_1981_2012.nc
+
+echo "concatenation done"
+
+ncdump -h sst_NWA_1981_2012.nc
+
+
+# define mask file
+
+if mask file is not 1 where mask and NaN elsewhere, do the following:
+maskvalue is value of mask at the points you want
+operator depends on what the other values of mask are which you dont want:
+if maskvalue < fillvalue: operator is lec (lower equals constant)
+if maskvalue > fillvalue: operator is gec (greater equals constant)
+set fillvalues which become 0 to NaN
+
+cdo operator,maskvalue infile.nc outfile.nc
+cdo setctomiss,0 infile.nc outfile.nc
+
+# apply mask
+
+mask has 1 where mask and nan elsewhere; basically multiplies array with mask, x*NaN -> NaN
+setctomiss,0 because land values where fill values (value=0) in first infile and ended up as 0 after masking, thsi ends up to fill values being NaN
+
+cdo mul maskfile.nc infile.nc outfile.nc
+cdo setctomiss,0 infile.nc outfile.nc
+(cut file to just mask in it with ncks, looked up indices with ncview, I guess there is a better way, but whatever)
+
+cdo mul ecomask_region3.nc temp_shelf/temp_shelf_1980_2019.nc temp_shelf/temp_shelf_1980_2019_masked.nc
+cdo setctomiss,0 temp_shelf_1980_2019_masked.nc temp_shelf_1980_2019_masked2.nc
+ncks -d x,50,257 -d y,100,275 temp_shelf_1980_2019_masked2.nc temp_shelf_1980_2019_masked_final.nc
+
+
+

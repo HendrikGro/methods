@@ -1,0 +1,32 @@
+alias jup='conda activate base && jupyter lab --no-browser --port=8080'
+alias data='cd /data/user/tomartin/forHendrik'
+alias home='cd /home/hgrosselindemann/'
+alias gitup='~/.gitupdate.sh'
+alias ..='cd ..'
+
+PS1="\e[1;32m[\u@\h \W]\$ \e[m "
+
+
+
+#!/bin/bash
+name=$1
+cd /home/hgrosselindemann/MHW_Shelf_BT/
+
+if [[ -n "$name" ]]; then
+        git add --all
+        git commit -m $1
+        git push
+else
+        echo "commit description missing"
+fi
+
+alias tungeo='ssh -N -L 8080:localhost:8080 hgrosselindemann@ursus7.geomar.de'
+alias tunnesh='ssh -N -L 8080:localhost:8080 smomw484@nesh-fe.rz.uni-kiel.de'
+alias ursus7='ssh -X hgrosselindemann@ursus7.geomar.de'
+alias scalc01='ssh -X hgrosselindemann@scalc01.geomar.de'
+alias resgeo='scp -r hgrosselindemann@ursus7.geomar.de:/home/hgrosselindemann/results_paper/ /home/hgrosselindemann/Documents/'
+alias resnesh='scp -r smomw484@nesh-fe.rz.uni-kiel.de:/gxfs_work1/geomar/smomw484/results/ /home/hgrosselindemann/Documents/'
+alias nesh='ssh -X smomw484@nesh-fe.rz.uni-kiel.de'
+alias sshtun='/home/hgrosselindemann/Documents/run_chromium_through_ssh_tunnel.sh smomw484@nesh-fe.rz.uni-kiel.de'
+
+alias sshcon=/home/hgrosselindemann/Documents/.ssh_connect.sh
