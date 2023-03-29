@@ -1,0 +1,24 @@
+Useful python packages:
+- great for xarray
+  - xmovie (animations)
+  - xesmf (regridding)
+  - xeofs (eof)
+  - xrft (spectral analysis)
+- cartopy
+- datetime
+- gsw
+- seawater
+- cmocean
+- scipy
+- pandas
+- dask
+- geopandas
+- nfft
+- netcdf4
+- ffmpeg
+- matplotlib
+- numpy
+- seaborn
+- zarr
+- math
+- cmath
