@@ -1,9 +1,10 @@
 Useful python packages:
 - great for xarray
   - xmovie (animations)
-  - xesmf (regridding)
+  - xesmf (regridding) (needs esmpy)
   - xeofs (eof)
   - xrft (spectral analysis)
+  - xmhw (mhw detection)
 - cartopy
 - datetime
 - gsw
@@ -18,7 +19,14 @@ Useful python packages:
 - ffmpeg
 - matplotlib
 - numpy
+- numba
 - seaborn
 - zarr
 - math
 - cmath
+- xorca
+- (xgcm)
+- shapely
+- tools
+  - pyeddytracker
+  - ocean parcels
