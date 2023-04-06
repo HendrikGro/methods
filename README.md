@@ -1,6 +1,6 @@
 # methods
 
-## pyhton_methods
+## python_methods
 - find index of closest values in numpy array
 - shift lon from 0-360 to -180,180
 - datetime format from datestring
@@ -15,3 +15,10 @@
 - non-uniform discrete fourier transform
 - xmovie example custom plotfunc
 - spatial correlation xarray apply_ufunc
+- section extraction
+- rotate velocities on section
+- velocity vector cross correlation
+- cross spectrum for non-uniform time series
+
+## packages
+- useful python packages for eartch system data to include in container image
