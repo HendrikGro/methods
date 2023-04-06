@@ -21,4 +21,4 @@
 - cross spectrum for non-uniform time series
 
 ## packages
-- useful python packages for eartch system data to include in container image
+- useful python packages for earth system data to include in container image
