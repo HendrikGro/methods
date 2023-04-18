@@ -50,4 +50,8 @@ cdo setctomiss,0 temp_shelf_1980_2019_masked.nc temp_shelf_1980_2019_masked2.nc
 ncks -d x,50,257 -d y,100,275 temp_shelf_1980_2019_masked2.nc temp_shelf_1980_2019_masked_final.nc
 
 
+# daily to 5daily data
 
+cdo mergetime infile*.nc allyears.nc
+cdo timselmean,5 allyears.nc allyears_5d.nc
+cdo splityear allyears_5d.nc infile_5d
