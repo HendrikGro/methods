@@ -5,6 +5,7 @@ Useful python packages:
   - xeofs (eof)
   - xrft (spectral analysis)
   - xmhw (mhw detection)
+  - xhistogram
 - cartopy
 - datetime
 - gsw
@@ -27,6 +28,7 @@ Useful python packages:
 - xorca
 - (xgcm)
 - shapely
+- recombinator
 - tools
   - pyeddytracker
   - ocean parcels
