@@ -7,6 +7,7 @@ Useful python packages:
   - xmhw (mhw detection)
   - xhistogram
 - cartopy
+  - cartopy_offline
 - datetime
 - gsw
 - seawater
